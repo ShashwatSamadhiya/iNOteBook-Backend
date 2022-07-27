@@ -5,7 +5,7 @@ const connectToMongo=require ('./db');
 connectToMongo();
 
 const app=express()
-const port =5000;
+
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +15,11 @@ app.use('/api/auth',require('./routes/auth'))
 app.use('/api/notes/',require('./routes/notes'))
 app.use('/',require('./routes/tester'))
 
+let port =process.env.PORT;
+if(port==null || port==""){
+    port=5000;
+}
 
 app.listen(port,()=>{
-    console.log(`iNoteBook app listening at port http://localhost:${port}`);
+    console.log(`iNoteBook app Server started at port http://localhost:${port}`);
 })
